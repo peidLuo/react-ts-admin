@@ -1,0 +1,10 @@
+{
+  "eslintIntegration": true,
+  "singleQuote": true,
+  "semi": true,
+  "comma-dangle": ["error", "never"],
+  "space-before-function-paren": ["error", "always"],
+  "eslint max-len": ["error", 80],
+  "printWidth": 80,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true
+}
