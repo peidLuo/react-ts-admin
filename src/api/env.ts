@@ -1,9 +1,9 @@
 import { EnvConfig } from './types';
 
 const {
-  VUE_APP_ENV,
-  VUE_APP_MOCK
-}: { VUE_APP_ENV: string; VUE_APP_MOCK: string } = process.env;
+  REACT_APP_ENV,
+  REACT_APP_MOCK_PATH
+}: { REACT_APP_ENV: string; REACT_APP_MOCK_PATH: string } = process.env;
 
 const config: EnvConfig = {
   dev: {
@@ -21,11 +21,10 @@ const config: EnvConfig = {
   mock: {
     // baseUrl: VUE_APP_MOCK
     baseUrl: '//127.0.0.1:5000/api'
-    // baseUrl: '//xxx.com/api'
-    // baseUrl: '//xxx.com/api'
   }
 };
 
-const KEY = VUE_APP_ENV === 'local' && VUE_APP_MOCK ? 'mock' : VUE_APP_ENV;
+const KEY =
+  REACT_APP_ENV === 'local' && REACT_APP_MOCK_PATH ? 'mock' : REACT_APP_ENV;
 
 export default config[KEY];

@@ -13,7 +13,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const LayoutComp: React.FC = props => {
   return (
-    <Spin spinning={true} delay={500}>
+    <Spin spinning={false} delay={500}>
       <Layout>
         <Header className="header">
           <div className="logo" />

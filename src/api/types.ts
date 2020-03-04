@@ -8,3 +8,9 @@ export interface EnvConfig {
     baseUrl: string;
   };
 }
+
+export interface LoginParams {
+  username: string;
+  password: string;
+  captcha: string;
+}

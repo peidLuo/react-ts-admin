@@ -56,7 +56,7 @@ declare namespace NodeJS {
   // Merge the existing `ProcessEnv` definition with ours
   // https://www.typescriptlang.org/docs/handbook/declaration-merging.html#merging-interfaces
   export interface ProcessEnv {
-    VUE_APP_MOCK: string;
-    VUE_APP_ENV: string;
+    REACT_APP_MOCK_PATH: string;
+    REACT_APP_ENV: string;
   }
 }
