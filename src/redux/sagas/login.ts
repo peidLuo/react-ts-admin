@@ -1,12 +1,17 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { login } from '@/api/sys';
-import { LoginParams } from '@/api/types';
+import { LoginAction } from '@/redux/store/Login/actions';
+import { LOGIN_REQUEST } from '@/redux/store/Login/actions';
 
-export function* fetchData(params: LoginParams) {
+function* loginAsync({ payload }: LoginAction) {
   try {
-    const data = yield call(login, params);
+    const data = yield call(login, payload);
     yield put({ type: 'LOGIN_SUCCEEDED', data });
   } catch (error) {
     yield put({ type: 'LOGIN_FAILED', error });
   }
+}
+
+export default function* loginSaga() {
+  yield takeEvery(LOGIN_REQUEST, loginAsync);
 }

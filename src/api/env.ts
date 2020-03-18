@@ -1,5 +1,7 @@
 import { EnvConfig } from './types';
 
+const path = ['children', '_', 'center'];
+
 const {
   REACT_APP_ENV,
   REACT_APP_MOCK_PATH
@@ -20,7 +22,7 @@ const config: EnvConfig = {
   },
   mock: {
     // baseUrl: VUE_APP_MOCK
-    baseUrl: '//127.0.0.1:5000/api'
+    baseUrl: `//127.0.0.1:5000/${path[0]}${path[1]}${path[2]}/api`
   }
 };
 

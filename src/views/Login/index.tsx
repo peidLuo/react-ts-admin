@@ -1,5 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { LOGIN_REQUEST } from '@/redux/store/Login/actions';
+
 import env from '@/api/env';
 
 import styles from './index.less';
@@ -7,18 +11,18 @@ import styles from './index.less';
 const baseUrl = env.baseUrl;
 
 const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 8 }
+  labelCol: { span: 4 },
+  wrapperCol: { span: 16 }
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 }
+  wrapperCol: { offset: 4, span: 16 }
 };
-export default () => {
+const Login: React.FC = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
   const [captchaTime, setCaptchaTime] = useState(new Date().getTime());
-
-  const onFinish = (values: { [name: string]: string }) => {
-    console.log(values);
+  const onFinish = (values: HashMapObj) => {
+    dispatch({ type: LOGIN_REQUEST, payload: values });
   };
   const changeCap = () => {
     setCaptchaTime(new Date().getTime());
@@ -30,7 +34,7 @@ export default () => {
       className={styles['form-content']}
     >
       <Col span={12}>
-        <Card title="Login" bordered={false}>
+        <Card title="Skynet" bordered={false}>
           <Form
             {...layout}
             form={form}
@@ -38,37 +42,42 @@ export default () => {
             onFinish={onFinish}
           >
             <Form.Item
-              name="name"
-              label="Note"
+              name="username"
+              label="用户名"
               rules={[{ required: true, message: '请填写name' }]}
             >
-              <Input placeholder="name" />
+              <Input size="large" placeholder="username" />
             </Form.Item>
             <Form.Item
               name="password"
-              label="password"
+              label="密&#12288;码"
               rules={[{ required: true, message: '请填写password' }]}
             >
-              <Input placeholder="password" />
+              <Input.Password size="large" placeholder="password" />
             </Form.Item>
             <Form.Item
               name="captcha"
-              label="captcha"
+              label="验证码"
               rules={[{ required: true, message: '请填写captcha' }]}
             >
-              <Fragment>
-                <Input placeholder="captcha" />
-                <img
-                  src={`${baseUrl}/captcha?t=${captchaTime}`}
-                  alt="验证码"
-                  onClick={changeCap}
-                  width="120px"
-                />
-              </Fragment>
+              <Row>
+                <Col span={16}>
+                  <Input size="large" placeholder="captcha" />
+                </Col>
+                <Col span={4}>
+                  <img
+                    src={`${baseUrl}/captcha?t=${captchaTime}`}
+                    alt="验证码"
+                    className="pointer"
+                    onClick={changeCap}
+                    width="120px"
+                  />
+                </Col>
+              </Row>
             </Form.Item>
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                Submit
+              <Button size="large" block type="primary" htmlType="submit">
+                登陆
               </Button>
             </Form.Item>
           </Form>
@@ -77,3 +86,4 @@ export default () => {
     </Row>
   );
 };
+export default Login;
